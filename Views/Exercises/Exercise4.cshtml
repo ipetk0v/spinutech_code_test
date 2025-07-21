@@ -1,0 +1,153 @@
+@model SpinutechCodeTest.Models.GameOfLifeViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h2 class="mb-0">@Model.Title</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h4>Problem Description</h4>
+                        <p>Write some code that evolves generations through the "game of life". The input will be a game board of cells, either alive (1) or dead (0).</p>
+                        
+                        <h5>Rules:</h5>
+                        <ol>
+                            <li>Any live cell with fewer than two live neighbours dies (underpopulation)</li>
+                            <li>Any live cell with two or three live neighbours lives on to the next generation (survival)</li>
+                            <li>Any live cell with more than three live neighbours dies (overcrowding)</li>
+                            <li>Any dead cell with exactly three live neighbours becomes a live cell (reproduction)</li>
+                        </ol>
+                        
+                        <h5>Example:</h5>
+                        <div class="bg-light p-3 rounded">
+                            <p class="mb-2"><strong>Input:</strong></p>
+                            <pre class="mb-2">0 1 0 0 0
+1 0 0 1 1
+1 1 0 0 1
+0 1 0 0 0
+1 0 0 0 1</pre>
+                            <p class="mb-0"><strong>Next Generation:</strong></p>
+                            <pre class="mb-0">0 0 0 0 0
+1 0 1 1 1
+1 1 1 1 1
+0 1 0 0 0
+0 0 0 0 0</pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Try It Out</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post" asp-action="Exercise4">
+                                    <div class="mb-3">
+                                        <label for="boardInput" class="form-label">Enter Game Board:</label>
+                                        <textarea class="form-control" id="boardInput" name="boardInput" rows="5" 
+                                                  placeholder="0 1 0 0 0&#10;1 0 0 1 1&#10;1 1 0 0 1&#10;0 1 0 0 0&#10;1 0 0 0 1" required>@Model.BoardInput</textarea>
+                                        <div class="form-text">
+                                            Enter a game board with 0s (dead cells) and 1s (live cells). Each row on a new line.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="generations" class="form-label">Number of Generations (optional):</label>
+                                        <input type="number" class="form-control" id="generations" name="generations" 
+                                               value="@Model.Generations" placeholder="1" min="1" max="10">
+                                        <div class="form-text">Leave empty for next generation only</div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Evolve Board</button>
+                                </form>
+
+                                @if (!string.IsNullOrEmpty(Model.FinalBoard))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Result:</h5>
+                                        <div class="alert alert-warning">
+                                            <pre class="mb-0" style="font-family: monospace; font-size: 14px;">@Model.FinalBoard</pre>
+                                        </div>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Error:</h5>
+                                        <div class="alert alert-danger">
+                                            <strong>@Model.ErrorMessage</strong>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Examples</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Quick Examples</div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Blinker:</strong><br>
+                                                <code>0 1 0<br>0 1 0<br>0 1 0</code></li>
+                                            <li><strong>Block:</strong><br>
+                                                <code>1 1<br>1 1</code></li>
+                                            <li><strong>Glider:</strong><br>
+                                                <code>0 1 0<br>0 0 1<br>1 1 1</code></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Game Rules</div>
+                                    <div class="card-body">
+                                        <ol class="mb-0">
+                                            <li>Any live cell with fewer than 2 neighbors dies (underpopulation)</li>
+                                            <li>Any live cell with 2 or 3 neighbors lives (survival)</li>
+                                            <li>Any live cell with more than 3 neighbors dies (overcrowding)</li>
+                                            <li>Any dead cell with exactly 3 neighbors becomes alive (reproduction)</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Algorithm Explanation</h4>
+                        <ul>
+                            <li><strong>Neighbor Counting:</strong> Checks all 8 surrounding cells for each position</li>
+                            <li><strong>Boundary Handling:</strong> Only counts neighbors within board boundaries</li>
+                            <li><strong>Rule Application:</strong> Applies Conway's Game of Life rules to determine next state</li>
+                            <li><strong>Immutable Evolution:</strong> Creates new board instead of modifying existing one</li>
+                            <li><strong>Multiple Generations:</strong> Can evolve board through multiple generations</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>Implements classic Conway's Game of Life rules</li>
+                            <li>Handles arbitrary board sizes</li>
+                            <li>Proper boundary checking</li>
+                            <li>Support for multiple generation evolution</li>
+                            <li>Clean, readable code structure</li>
+                            <li>Both console output and string return options</li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="@Url.Action("Exercise3", "Exercises")" class="btn btn-primary">Previous Exercise</a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+                        <a href="@Url.Action("Exercise5", "Exercises")" class="btn btn-success">Next Exercise</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

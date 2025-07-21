@@ -1,0 +1,162 @@
+@model SpinutechCodeTest.Models.NumberToWordsViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">@Model.Title</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h4>Problem Description</h4>
+                        <p>Write some code that will accept an amount and convert it to the appropriate string representation.</p>
+
+                        <h5>Example:</h5>
+                        <div class="bg-light p-3 rounded">
+                            <p class="mb-1"><strong>Input:</strong> 2523.04</p>
+                            <p class="mb-0"><strong>Output:</strong> "Two thousand five hundred twenty-three and 04/100 dollars"</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Try It Out</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post" asp-action="Exercise1">
+                                    <div class="mb-3">
+                                        <label for="amount" class="form-label">Enter Amount:</label>
+                                        <input type="text" class="form-control" id="amount" name="amountInput"
+                                               value="@Model.Number?.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)" placeholder="e.g., 2523.04" required>
+                                        <div class="form-text">Enter a decimal number to convert to words</div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Convert to Words</button>
+                                </form>
+
+                                @if (!string.IsNullOrEmpty(Model.Result))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Result:</h5>
+                                        <div class="alert alert-success">
+                                            <strong>@Model.Result</strong>
+                                        </div>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Error:</h5>
+                                        <div class="alert alert-danger">
+                                            <strong>@Model.ErrorMessage</strong>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Examples</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Quick Examples</div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>2523.04</strong> → Two thousand five hundred twenty-three and 04/100 dollars</li>
+                                            <li><strong>1000.00</strong> → One thousand dollars</li>
+                                            <li><strong>123.45</strong> → One hundred twenty-three and 45/100 dollars</li>
+                                            <li><strong>0.99</strong> → Zero and 99/100 dollars</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Features</div>
+                                    <div class="card-body">
+                                        <ul>
+                                            <li>Handles amounts up to billions</li>
+                                            <li>Properly formats cents as fractions</li>
+                                            <li>Uses correct English number words</li>
+                                            <li>Handles edge cases (zero, single digits, teens)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>Handles amounts up to billions</li>
+                            <li>Properly formats cents as fractions</li>
+                            <li>Uses correct English number words</li>
+                            <li>Handles edge cases (zero, single digits, teens)</li>
+                            <li>Clean, maintainable code structure</li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to Home</a>
+                        <a href="@Url.Action("Exercise2", "Exercises")" class="btn btn-success">Next Exercise</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Ensure proper decimal input handling
+        document.getElementById('amount').addEventListener('input', function(e) {
+            let value = e.target.value;
+            
+            // Allow only numbers and one decimal point
+            value = value.replace(/[^\d.]/g, '');
+            
+            // Ensure only one decimal point
+            const parts = value.split('.');
+            if (parts.length > 2) {
+                value = parts[0] + '.' + parts.slice(1).join('');
+            }
+            
+            // Limit to 2 decimal places
+            if (parts.length === 2 && parts[1].length > 2) {
+                value = parts[0] + '.' + parts[1].substring(0, 2);
+            }
+            
+            e.target.value = value;
+        });
+
+        // Add form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const amountInput = document.getElementById('amount');
+            const value = amountInput.value.trim();
+            
+            if (!value) {
+                e.preventDefault();
+                alert('Please enter an amount.');
+                return;
+            }
+            
+            // Check if it's a valid decimal number
+            const decimalRegex = /^\d+(\.\d{1,2})?$/;
+            if (!decimalRegex.test(value)) {
+                e.preventDefault();
+                alert('Please enter a valid decimal number (e.g., 2523.04).');
+                return;
+            }
+        });
+    </script>
+}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

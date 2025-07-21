@@ -1,0 +1,155 @@
+@model SpinutechCodeTest.Models.TemplateEngineViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h2 class="mb-0">@Model.Title</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h4>Problem Description</h4>
+                        <p>Write some code that can be used in a templating engine. This should take a map of variables and a string template and perform substitution as needed.</p>
+                        
+                        <h5>Requirements:</h5>
+                        <ul>
+                            <li>Throw an error if a template uses a variable that has not been assigned</li>
+                            <li>Provide a way to escape the strings ("hello ${${name}}" → "hello ${Billy}")</li>
+                        </ul>
+                        
+                        <h5>Example:</h5>
+                        <div class="bg-light p-3 rounded">
+                            <p class="mb-1"><strong>Variables:</strong> "day" => "Thursday", "name" => "Billy"</p>
+                            <p class="mb-1"><strong>Template:</strong> "${name} has an appointment on ${day}"</p>
+                            <p class="mb-0"><strong>Output:</strong> "Billy has an appointment on Thursday"</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Try It Out</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post" asp-action="Exercise5">
+                                    <div class="mb-3">
+                                        <label for="template" class="form-label">Template:</label>
+                                        <textarea class="form-control" id="template" name="template" rows="3" 
+                                                  placeholder="${name} has an appointment on ${day} at ${time}" required>@Model.Template</textarea>
+                                        <div class="form-text">
+                                            Use ${variable} syntax. For escaped variables, use ${${variable}}
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="variables" class="form-label">Variables (one per line, format: name=value):</label>
+                                        <textarea class="form-control" id="variables" name="variables" rows="4" 
+                                                  placeholder="name=Billy&#10;day=Thursday&#10;time=2:30 PM">@Model.Variables</textarea>
+                                        <div class="form-text">
+                                            Define variables in format: variableName=value (one per line)
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Process Template</button>
+                                </form>
+
+                                @if (!string.IsNullOrEmpty(Model.ProcessedTemplate))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Result:</h5>
+                                        <div class="alert alert-danger">
+                                            <strong>@Model.ProcessedTemplate</strong>
+                                        </div>
+                                        @if (Model.ExtractedVariables != null && Model.ExtractedVariables.Any())
+                                        {
+                                            <div class="alert alert-info">
+                                                <strong>Variables found in template:</strong> @string.Join(", ", Model.ExtractedVariables)
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Error:</h5>
+                                        <div class="alert alert-danger">
+                                            <strong>@Model.ErrorMessage</strong>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Examples</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Quick Examples</div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Template:</strong> ${name} has an appointment on ${day}<br>
+                                                <strong>Variables:</strong><br>
+                                                name=Billy<br>
+                                                day=Thursday<br>
+                                                <strong>Result:</strong> Billy has an appointment on Thursday</li>
+                                            <li><strong>Template:</strong> hello ${${name}}<br>
+                                                <strong>Variables:</strong><br>
+                                                name=Billy<br>
+                                                <strong>Result:</strong> hello ${Billy}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Features</div>
+                                    <div class="card-body">
+                                        <ul>
+                                            <li>Variable substitution with ${variable} syntax</li>
+                                            <li>Error handling for undefined variables</li>
+                                            <li>Escape support with ${${variable}}</li>
+                                            <li>Nested brace handling</li>
+                                            <li>Variable extraction from templates</li>
+                                            <li>Robust parsing and validation</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li><strong>Variable Substitution:</strong> Replaces ${variable} with actual values</li>
+                            <li><strong>Error Handling:</strong> Throws exceptions for undefined variables</li>
+                            <li><strong>Escape Support:</strong> Handles ${${variable}} for literal ${variable}</li>
+                            <li><strong>Nested Braces:</strong> Properly handles nested brace structures</li>
+                            <li><strong>Variable Extraction:</strong> Can extract all variables from a template</li>
+                            <li><strong>Default Values:</strong> Optional method with default value fallback</li>
+                            <li><strong>Robust Parsing:</strong> Handles edge cases and malformed templates</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Error Handling</h4>
+                        <ul>
+                            <li><strong>Undefined Variables:</strong> Throws TemplateException with descriptive message</li>
+                            <li><strong>Unclosed Braces:</strong> Detects and reports malformed template syntax</li>
+                            <li><strong>Empty Variables:</strong> Handles empty variable names gracefully</li>
+                            <li><strong>Null/Empty Templates:</strong> Returns input as-is for null or empty templates</li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="@Url.Action("Exercise4", "Exercises")" class="btn btn-primary">Previous Exercise</a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+                        <a href="@Url.Action("Exercise6", "Exercises")" class="btn btn-success">Next Exercise</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

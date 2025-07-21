@@ -1,0 +1,130 @@
+@model SpinutechCodeTest.Models.SpiralViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h2 class="mb-0">@Model.Title</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h4>Problem Description</h4>
+                        <p>Write some code that accepts an integer and prints the integers from 0 to that input integer in a spiral format.</p>
+                        
+                        <h5>Example:</h5>
+                        <div class="bg-light p-3 rounded">
+                            <p class="mb-2"><strong>Input:</strong> 24</p>
+                            <p class="mb-0"><strong>Output:</strong></p>
+                            <pre class="mb-0">20 21 22 23 24
+19  6  7  8  9
+18  5  0  1 10
+17  4  3  2 11
+16 15 14 13 12</pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Try It Out</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post" asp-action="Exercise3">
+                                    <div class="mb-3">
+                                        <label for="maxNumber" class="form-label">Enter Maximum Number:</label>
+                                        <input type="number" class="form-control" id="maxNumber" name="maxNumber" 
+                                               value="@Model.MaxNumber" placeholder="e.g., 24" min="0" max="100" required>
+                                        <div class="form-text">Enter a number from 0 to 100 to generate a spiral</div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Generate Spiral</button>
+                                </form>
+
+                                @if (!string.IsNullOrEmpty(Model.SpiralOutput))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Spiral Result:</h5>
+                                        <div class="alert alert-info">
+                                            <pre class="mb-0" style="font-family: monospace; font-size: 14px;">@Model.SpiralOutput</pre>
+                                        </div>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Error:</h5>
+                                        <div class="alert alert-danger">
+                                            <strong>@Model.ErrorMessage</strong>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Examples</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Quick Examples</div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Input: 8</strong> - 3x3 spiral</li>
+                                            <li><strong>Input: 24</strong> - 5x5 spiral</li>
+                                            <li><strong>Input: 48</strong> - 7x7 spiral</li>
+                                            <li><strong>Input: 80</strong> - 9x9 spiral</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Algorithm Features</div>
+                                    <div class="card-body">
+                                        <ul>
+                                            <li>Starts from center of grid</li>
+                                            <li>Moves in spiral pattern: Right → Down → Left → Up</li>
+                                            <li>Step size increases every 2 direction changes</li>
+                                            <li>Automatically calculates optimal grid size</li>
+                                            <li>Proper formatting with aligned columns</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Algorithm Explanation</h4>
+                        <ul>
+                            <li><strong>Grid Size:</strong> Calculated as the ceiling of square root of (maxNumber + 1)</li>
+                            <li><strong>Starting Point:</strong> Center of the grid</li>
+                            <li><strong>Movement Pattern:</strong> Right → Down → Left → Up, with increasing step size</li>
+                            <li><strong>Step Size:</strong> Increases every 2 direction changes (1, 1, 2, 2, 3, 3, ...)</li>
+                            <li><strong>Boundary Check:</strong> Only places numbers within grid boundaries</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>Handles any positive integer input</li>
+                            <li>Automatically calculates optimal grid size</li>
+                            <li>Proper formatting with aligned columns</li>
+                            <li>Both console output and string return options</li>
+                            <li>Efficient spiral generation algorithm</li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="@Url.Action("Exercise2", "Exercises")" class="btn btn-primary">Previous Exercise</a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+                        <a href="@Url.Action("Exercise4", "Exercises")" class="btn btn-success">Next Exercise</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "Ivan Petkov - Senior .NET Developer";
+}
+
+<!-- Hero Section -->
+<div class="hero-section bg-primary text-white py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-4 fw-bold">Ivan Petkov</h1>
+                <h2 class="h3 mb-4">Senior .NET Developer</h2>
+                <p class="lead mb-4">
+                    Experienced developer with a strong focus on ASP.NET Core, C#, and modern web technologies. Specialized in building and customizing scalable eCommerce solutions using nopCommerce. Passionate about clean, maintainable code, architectural design, and delivering high-performance web applications. Committed to continuous improvement, team collaboration, and staying current with evolving technologies.
+                </p>
+                <div class="d-flex gap-3">
+                    <a href="#resume" class="btn btn-light btn-lg">View Resume</a>
+                    <a href="#exercises" class="btn btn-outline-light btn-lg">Exercises</a>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="profile-image-placeholder">
+                    <img src="../img/1683659873217.jpeg" title="Ivan Petkov" alt="Ivan Petkov" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Resume Section -->
+<section id="resume" class="py-5">
+    <div class="container">
+        <h2 class="text-left mb-5">Resume</h2>
+
+        <!-- Skills -->
+        <div class="row mb-5">
+            <div class="col-lg-12">
+                <h3 class="mb-4">Technical Skills</h3>
+                <div class="skill-category mb-4">
+                    <h5>Backend Development</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-primary">C#</span>
+                        <span class="badge bg-primary">ASP.NET Core</span>
+                        <span class="badge bg-primary">Entity Framework</span>
+                        <span class="badge bg-primary">SQL Server</span>
+                        <span class="badge bg-primary">PostgreSQL</span>
+                        <span class="badge bg-primary">REST APIs</span>
+                        <span class="badge bg-primary">Web API</span>
+                    </div>
+                </div>
+                <div class="skill-category mb-4">
+                    <h5>Frontend Development</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-success">HTML5</span>
+                        <span class="badge bg-success">CSS3</span>
+                        <span class="badge bg-success">JavaScript</span>
+                        <span class="badge bg-success">Bootstrap</span>
+                        <span class="badge bg-success">Razor Pages</span>
+                    </div>
+                </div>
+                <div class="skill-category mb-4">
+                    <h5>Tools & Technologies</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-info">Visual Studio</span>
+                        <span class="badge bg-info">Git</span>
+                        <span class="badge bg-info">Azure DevOps</span>
+                        <span class="badge bg-info">Docker</span>
+                        <span class="badge bg-info">Unit Testing</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <h3 class="mb-4">Professional Experience</h3>
+                <div class="experience-item mb-4">
+                    <h5>noptech owner</h5>
+                    <p class="text-muted">2022 - Present</p>
+                    <p>
+                        As the Founder and CEO of noptech, I lead a dedicated team specializing in nopCommerce solutions, including custom plugin development, theme design, and enterprise-level eCommerce solutions. My role involves:
+                        <ul>
+                            <li>Strategic Leadership – Setting the vision, roadmap, and growth strategies for noptech to establish it as a leading provider of nopCommerce solutions.</li>
+                            <li>Product & Technology Innovation – Overseeing the development of high-quality nopCommerce themes, plugins, and integrations, ensuring our clients get cutting-edge, scalable solutions.</li>
+                            <li>Client & Partner Relations – Building strong relationships with eCommerce businesses, helping them optimize and scale their online presence through tailored development and consulting.</li>
+                            <li>Technical Oversight – Managing development teams, ensuring best practices in .NET Core, ASP.NET, C#, Entity Framework, and SQL Server are upheld for optimal performance and security.</li>
+                            <li>Business Growth & Market Expansion – Driving innovation, marketing, and operational strategies to expand our reach and deliver top-tier solutions globally.</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="experience-item mb-4">
+                    <h5>.NET Team Lead</h5>
+                    <p class="text-muted">2020 - Present</p>
+                    <p>
+                        Experienced .NET developer and current Team Lead at Exelia Technologies with over 4 years of proven expertise in developing and maintaining enterprise-grade solutions within the maritime industry. Skilled in system architecture, cross-functional team leadership, and delivering high-performance applications. Adept at integrating external systems via XML, APIs, and file transfers, and leading AI-driven initiatives for document recognition and analytics. Known for driving innovation, mentoring developers, and aligning engineering efforts with strategic business goals.
+                    </p>
+                </div>
+                <div class="experience-item mb-4">
+                    <h5>.NET Developer in Navtech Group</h5>
+                    <p class="text-muted">2018 - 2021</p>
+                    <p>
+                        As a .NET Software Developer at NavTech Group, I was responsible for developing web applications with a strong focus on e-commerce solutions using nopCommerce. My primary role involved integrating nopCommerce with Microsoft Dynamics NAV, which required a deep understanding of both platforms.
+
+                        Throughout this role, I gained solid experience in working with web services, including SOAP communication, and handled complex message queue (MQ) systems for reliable data exchange. This position greatly enhanced my skills in customizing nopCommerce, developing scalable integrations, and building efficient, enterprise-grade solutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Exercises Section -->
+<section id="exercises" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Interview Test Exercises</h2>
+        <p class="text-center lead mb-5">This project demonstrates my skills in various areas of .NET development</p>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Exercise 1</h5>
+                        <p class="card-text">Number to Words Converter</p>
+                        <a href="@Url.Action("Exercise1", "Exercises")" class="btn btn-primary">View Exercise</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Exercise 2</h5>
+                        <p class="card-text">Poker Hand Evaluator</p>
+                        <a href="@Url.Action("Exercise2", "Exercises")" class="btn btn-primary">View Exercise</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Exercise 3</h5>
+                        <p class="card-text">Spiral Number Generator</p>
+                        <a href="@Url.Action("Exercise3", "Exercises")" class="btn btn-primary">View Exercise</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Exercise 4</h5>
+                        <p class="card-text">Game of Life</p>
+                        <a href="@Url.Action("Exercise4", "Exercises")" class="btn btn-primary">View Exercise</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Exercise 5</h5>
+                        <p class="card-text">Template Engine</p>
+                        <a href="@Url.Action("Exercise5", "Exercises")" class="btn btn-primary">View Exercise</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Exercise 6</h5>
+                        <p class="card-text">Palindrome Checker</p>
+                        <a href="@Url.Action("Exercise6", "Exercises")" class="btn btn-primary">View Exercise</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h3 class="mb-4">Get In Touch</h3>
+                <div class="d-flex justify-content-center gap-4">
+                    <a href="mailto:ivan.petkov@nop-tech.com" class="btn btn-outline-primary">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                    <a  href="https://linkedin.com/in/ivan-petkov-272975101" class="btn btn-outline-primary">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/ipetk0v" class="btn btn-outline-primary">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

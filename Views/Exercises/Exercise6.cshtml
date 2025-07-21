@@ -1,0 +1,205 @@
+@model SpinutechCodeTest.Models.PalindromeViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-secondary text-white">
+                    <h2 class="mb-0">@Model.Title</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h4>Problem Description</h4>
+                        <p>Please implement a function that checks whether a positive number is a palindrome or not.</p>
+                        
+                        <h5>Example:</h5>
+                        <div class="bg-light p-3 rounded">
+                            <p class="mb-1"><strong>Input:</strong> 121</p>
+                            <p class="mb-1"><strong>Output:</strong> true (121 is a palindrome)</p>
+                            <p class="mb-0"><strong>Input:</strong> 123</p>
+                            <p class="mb-0"><strong>Output:</strong> false (123 is not a palindrome)</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Try It Out</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post" asp-action="Exercise6">
+                                    <div class="mb-3">
+                                        <label for="number" class="form-label">Enter Number:</label>
+                                        <input type="number" class="form-control" id="number" name="number" 
+                                               value="@Model.Number" placeholder="e.g., 121" required>
+                                        <div class="form-text">Enter a positive number to check if it's a palindrome</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="startRange" class="form-label">Start Range (optional):</label>
+                                                                                        <input type="number" class="form-control" id="startRange" name="startRange" 
+                                               value="@Model.StartRange" placeholder="e.g., 100" min="0">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="endRange" class="form-label">End Range (optional):</label>
+                                                                                        <input type="number" class="form-control" id="endRange" name="endRange" 
+                                               value="@Model.EndRange" placeholder="e.g., 200" min="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Check Palindrome</button>
+                                </form>
+
+                                @if (!string.IsNullOrEmpty(Model.Result))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Result:</h5>
+                                        <div class="alert alert-secondary">
+                                            <strong>@Model.Result</strong>
+                                        </div>
+                                        @if (Model.NextPalindrome.HasValue)
+                                        {
+                                            <div class="alert alert-info">
+                                                <strong>Next palindrome after @Model.Number: @Model.NextPalindrome</strong>
+                                            </div>
+                                        }
+                                        @if (Model.PalindromesInRange != null && Model.PalindromesInRange.Any())
+                                        {
+                                            <div class="alert alert-info">
+                                                <strong>Palindromes found: @string.Join(", ", Model.PalindromesInRange)</strong>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Error:</h5>
+                                        <div class="alert alert-danger">
+                                            <strong>@Model.ErrorMessage</strong>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Examples</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Quick Examples</div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>121</strong> → is a palindrome</li>
+                                            <li><strong>123</strong> → is not a palindrome</li>
+                                            <li><strong>12321</strong> → is a palindrome</li>
+                                            <li><strong>1</strong> → is a palindrome</li>
+                                            <li><strong>0</strong> → is a palindrome</li>
+                                            <li><strong>-121</strong> → is not a palindrome</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Features</div>
+                                    <div class="card-body">
+                                        <ul>
+                                            <li>Multiple algorithm approaches</li>
+                                            <li>Range checking for palindromes</li>
+                                            <li>Next palindrome finding</li>
+                                            <li>Edge case handling</li>
+                                            <li>Performance optimized</li>
+                                            <li>Negative number support</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Algorithm Comparison</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Method</th>
+                                        <th>Time Complexity</th>
+                                        <th>Space Complexity</th>
+                                        <th>Pros</th>
+                                        <th>Cons</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>String Method</td>
+                                        <td>O(log n)</td>
+                                        <td>O(log n)</td>
+                                        <td>Simple, readable</td>
+                                        <td>Extra space for string</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mathematical</td>
+                                        <td>O(log n)</td>
+                                        <td>O(1)</td>
+                                        <td>No extra space</td>
+                                        <td>Risk of overflow</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Half Comparison</td>
+                                        <td>O(log n)</td>
+                                        <td>O(1)</td>
+                                        <td>Most efficient</td>
+                                        <td>Slightly complex logic</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recursive</td>
+                                        <td>O(log n)</td>
+                                        <td>O(log n)</td>
+                                        <td>Elegant solution</td>
+                                        <td>Stack space overhead</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li><strong>Multiple Approaches:</strong> String, mathematical, half-comparison, and recursive methods</li>
+                            <li><strong>Edge Case Handling:</strong> Properly handles negative numbers, single digits, and zero</li>
+                            <li><strong>Performance Optimized:</strong> Half-comparison method is most efficient</li>
+                            <li><strong>Utility Methods:</strong> Range checking and next palindrome finding</li>
+                            <li><strong>Overflow Protection:</strong> Handles large numbers safely</li>
+                            <li><strong>Comprehensive Testing:</strong> Works with various number types and ranges</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Edge Cases Handled</h4>
+                        <ul>
+                            <li><strong>Negative Numbers:</strong> Always return false</li>
+                            <li><strong>Single Digits:</strong> Always palindromes (0-9)</li>
+                            <li><strong>Zero:</strong> Considered a palindrome</li>
+                            <li><strong>Numbers ending with 0:</strong> Can't be palindromes (except 0)</li>
+                            <li><strong>Large Numbers:</strong> Handled without overflow issues</li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="@Url.Action("Exercise5", "Exercises")" class="btn btn-primary">Previous Exercise</a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

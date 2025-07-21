@@ -1,0 +1,123 @@
+@model SpinutechCodeTest.Models.PokerHandViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h2 class="mb-0">@Model.Title</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h4>Problem Description</h4>
+                        <p>Write some code that will evaluate a poker hand and determine its rank.</p>
+                        
+                        <h5>Examples:</h5>
+                        <div class="bg-light p-3 rounded">
+                            <p class="mb-1"><strong>Hand:</strong> Ah As 10c 7d 6s → <strong>Pair of Aces</strong></p>
+                            <p class="mb-1"><strong>Hand:</strong> Kh Kc 3s 3h 2d → <strong>Two Pair</strong></p>
+                            <p class="mb-0"><strong>Hand:</strong> Kh Qh 6h 2h 9h → <strong>Flush</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Try It Out</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post" asp-action="Exercise2">
+                                    <div class="mb-3">
+                                        <label for="handInput" class="form-label">Enter Poker Hand:</label>
+                                        <input type="text" class="form-control" id="handInput" name="handInput" 
+                                               value="@Model.Hand" placeholder="e.g., Ah As 10c 7d 6s" required>
+                                        <div class="form-text">
+                                            Format: [Rank][Suit] [Rank][Suit] [Rank][Suit] [Rank][Suit] [Rank][Suit]<br>
+                                            Ranks: 2-9, T(10), J, Q, K, A | Suits: H(Hearts), D(Diamonds), C(Clubs), S(Spades)
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Evaluate Hand</button>
+                                </form>
+
+                                @if (!string.IsNullOrEmpty(Model.Result))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Result:</h5>
+                                        <div class="alert alert-success">
+                                            <strong>@Model.Result</strong>
+                                        </div>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                                {
+                                    <div class="mt-4">
+                                        <h5>Error:</h5>
+                                        <div class="alert alert-danger">
+                                            <strong>@Model.ErrorMessage</strong>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Examples</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Quick Examples</div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            <li><strong>Ah As 10c 7d 6s</strong> → Pair of Aces</li>
+                                            <li><strong>Kh Kc 3s 3h 2d</strong> → Two Pair</li>
+                                            <li><strong>Kh Qh 6h 2h 9h</strong> → Flush</li>
+                                            <li><strong>Ah Kh Qh Jh 10h</strong> → Royal Flush</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Hand Rankings</div>
+                                    <div class="card-body">
+                                        <ol class="mb-0">
+                                            <li>Royal Flush</li>
+                                            <li>Straight Flush</li>
+                                            <li>Four of a Kind</li>
+                                            <li>Full House</li>
+                                            <li>Flush</li>
+                                            <li>Straight</li>
+                                            <li>Three of a Kind</li>
+                                            <li>Two Pair</li>
+                                            <li>Pair</li>
+                                            <li>High Card</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>Evaluates all standard poker hand rankings</li>
+                            <li>Handles edge cases like Ace-low straights</li>
+                            <li>Provides descriptive hand names</li>
+                            <li>Clean object-oriented design</li>
+                            <li>Easy to extend for additional features</li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="@Url.Action("Exercise1", "Exercises")" class="btn btn-primary">Previous Exercise</a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+                        <a href="@Url.Action("Exercise3", "Exercises")" class="btn btn-success">Next Exercise</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
